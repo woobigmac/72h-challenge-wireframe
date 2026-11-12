@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>72시간 챌린지 와이어프레임 — 우승훈</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--ink:#141414;--muted:#5c5c66;--line:#dcdce2;--acc:#E0530A;--brand:#7C00FF}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html,body{margin:0}
+body{background:#ececf0;font-family:Pretendard,'Noto Sans KR',system-ui,sans-serif;color:var(--ink);word-break:keep-all}
+.top{background:#141414;color:#fff}
+.top-in{max-width:1320px;margin:0 auto;padding:14px 24px 6px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px}
+.top h1{margin:0;font-size:17px;font-weight:800;letter-spacing:-0.01em}
+.top .who{font-size:13px;color:#c9c9cf}
+.disc{max-width:1320px;margin:0 auto;padding:0 24px 12px;font-size:12px;line-height:1.5;color:#c9c9cf}
+.tabs{display:none}
+.frames{max-width:1320px;margin:0 auto;padding:24px;display:grid;grid-template-columns:repeat(3,392px);gap:32px;justify-content:center}
+.ft{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+.ft b{font-size:15px;font-weight:800}
+.ft span{font-size:12.5px;color:var(--muted)}
+.fs{height:calc(100vh - 175px);min-height:560px;overflow-y:auto;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(20,20,30,0.08);scroll-behavior:smooth}
+.frame.flash .fs{outline:3px solid var(--brand);outline-offset:3px}
+.readme{max-width:1320px;margin:0 auto;padding:8px 24px 40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.readme h2{margin:0 0 8px;font-size:14px;font-weight:800}
+.readme p,.readme li{margin:0;font-size:13px;line-height:1.65;color:#333}
+.readme ul{margin:0;padding:0;list-style:none}
+.readme li{position:relative;padding-left:12px;margin:3px 0}
+.readme li::before{content:"";position:absolute;left:1px;top:0.72em;width:4px;height:4px;border-radius:2px;background:var(--acc)}
+.foot{max-width:1320px;margin:0 auto;padding:0 24px 32px;font-size:12px;color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#141414;color:#fff;font-size:13px;line-height:1.5;padding:11px 16px;border-radius:10px;transition:opacity .2s,transform .2s;width:max-content;max-width:min(92vw,420px);text-align:center;z-index:50}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:1279px){
+ .tabs{position:sticky;top:0;z-index:20;display:flex;gap:6px;padding:10px 16px;background:#141414;overflow-x:auto}
+ .tabs button{flex:0 0 auto;min-height:40px;padding:0 14px;border:1px solid #4a4a52;border-radius:999px;background:transparent;color:#e6e6ea;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+ .tabs button[aria-selected="true"]{background:#fff;color:#141414;border-color:#fff}
+ .top-in{padding:12px 16px 4px}
+ .disc{padding:0 16px 12px}
+ .frames{display:block;padding:16px 0 8px}
+ .frame{display:none}
+ .frame.on{display:block}
+ .ft{max-width:480px;margin:0 auto 8px;padding:0 16px}
+ .fs{height:auto;min-height:0;overflow:visible;max-width:480px;margin:0 auto;border-radius:0;border-left:0;border-right:0;box-shadow:none}
+ .readme{grid-template-columns:1fr;padding:16px}
+ .foot{padding:0 16px 32px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+<div class="top-in"><h1>72시간 챌린지 와이어프레임</h1><span class="who">코드잇 10x 마케팅 매니저 사전 과제 · 우승훈 · 2026.11</span></div>
+<p class="disc">지원자가 과제로 만든 제안 시안입니다. 코드잇의 실제 서비스 페이지가 아니며, 버튼과 타이머는 동작 예시입니다.</p>
+</header>
+<nav class="tabs" role="tablist" aria-label="화면 선택">
+<button type="button" role="tab" aria-selected="true" data-tab-screen="main">① 신청</button>
+<button type="button" role="tab" aria-selected="false" data-tab-screen="onboarding">② 신청 직후</button>
+<button type="button" role="tab" aria-selected="false" data-tab-screen="detail">③ 상세페이지</button>
+</nav>
+<main class="frames">
+<section class="frame on" id="main" aria-label="신청 페이지"><div class="ft"><b>① 신청 페이지</b><span>훅부터 가입·로그인까지</span></div><div class="fs">
+
+<div style="background: #ececf0; font-family: Pretendard, 'Noto Sans KR', system-ui, sans-serif; color: #111; word-break: keep-all;">
+<div style="max-width: 480px; margin: 0 auto; background: #ffffff;">
+
+<header style="display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 20px; border-bottom: 1px solid #ececf0;">
+<span style="font-size: 16px; font-weight: 800; letter-spacing: -0.02em;">코드잇 <span style="color: #7C00FF;">10x</span></span>
+<a href="#onboarding" data-go="onboarding" style="display: flex; align-items: center; min-height: 44px; padding: 0 4px; font-size: 14px; font-weight: 500; text-decoration: none;">로그인</a>
+</header>
+
+<section style="display: flex; flex-direction: column; gap: 16px; padding: 28px 20px 32px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 1 · 훅</span>
+<figure style="margin: 0; padding: 14px 16px; border-radius: 12px; background: #F5EBFF;">
+<blockquote style="margin: 0; font-size: 14px; font-weight: 500; line-height: 1.6;">"앞으로 모든 회사의 IT 부서는 AI 에이전트의 인사팀이 될 것입니다."</blockquote>
+<figcaption style="margin-top: 6px; font-size: 12px; line-height: 1.5; color: #555;">젠슨 황, CES 2025 키노트<br>"The IT department of every company is going to be the HR department of AI agents in the future."</figcaption>
+</figure>
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; line-height: 1.35; letter-spacing: -0.02em;">72시간, 나만의 첫<br><span style="color: #7C00FF;">AI 마케팅 에이전트</span>를<br>채용해보세요</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #333;">매주 반복하는 리포트 업무 하나를 AI 에이전트에게 맡겨보세요. 무료 강의와 템플릿으로 직접 세팅합니다.</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+<div style="padding: 12px 8px; border-radius: 10px; background: #f7f7f9; text-align: center;">
+<div style="font-size: 12px; color: #555;">무료 강의</div>
+<div style="margin-top: 4px; font-size: 15px; font-weight: 700;">20–30분</div>
+</div>
+<div style="padding: 12px 8px; border-radius: 10px; background: #f7f7f9; text-align: center;">
+<div style="font-size: 12px; color: #555;">미니 미션</div>
+<div style="margin-top: 4px; font-size: 15px; font-weight: 700;">72시간 안에</div>
+</div>
+<div style="padding: 12px 8px; border-radius: 10px; background: #f7f7f9; text-align: center;">
+<div style="font-size: 12px; color: #555;">제출하면</div>
+<div style="margin-top: 4px; font-size: 15px; font-weight: 700; color: #7C00FF;">수강 쿠폰</div>
+</div>
+</div>
+<a href="#onboarding" data-go="onboarding" style="display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 12px; background: #7C00FF; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none;">무료로 신청하기</a>
+<p style="margin: 0; font-size: 13px; text-align: center; color: #555;">신청 폼 없이 가입·로그인만 하면 바로 신청됩니다</p>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 36px 20px; background: #f7f7f9;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 2 · 이런 마케터에게</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">이 중 하나라도<br>매주 하고 있다면</h2>
+<div style="padding: 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;">
+<div style="font-size: 12px; font-weight: 700; color: #7C00FF;">퍼포먼스 마케터</div>
+<p style="margin: 6px 0 0; font-size: 15px; font-weight: 700; line-height: 1.5;">월요일 오전마다 매체별 광고 리포트를 손으로 정리한다</p>
+<p style="margin: 6px 0 0; font-size: 13px; line-height: 1.55; color: #444;">→ 리포트 초안을 에이전트가 먼저 써두게 만듭니다</p>
+</div>
+<div style="padding: 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;">
+<div style="font-size: 12px; font-weight: 700; color: #7C00FF;">콘텐츠·브랜드 마케터</div>
+<p style="margin: 6px 0 0; font-size: 15px; font-weight: 700; line-height: 1.5;">경쟁사 광고와 업계 뉴스를 매일 따로 찾아본다</p>
+<p style="margin: 6px 0 0; font-size: 13px; line-height: 1.55; color: #444;">→ 흩어진 소식을 에이전트가 브리핑 한 장으로 정리하게 만듭니다</p>
+</div>
+<div style="padding: 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;">
+<div style="font-size: 12px; font-weight: 700; color: #7C00FF;">프리랜서·1인 마케터</div>
+<p style="margin: 6px 0 0; font-size: 15px; font-weight: 700; line-height: 1.5;">고객사마다 월간 리포트를 따로 쓴다</p>
+<p style="margin: 6px 0 0; font-size: 13px; line-height: 1.55; color: #444;">→ 고객사별 초안을 같은 형식으로 한 번에 받게 만듭니다</p>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 14px; padding: 36px 20px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 3 · 무료 강의에서 얻는 것</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">무료 강의 하나로<br>바로 따라 할 수 있게</h2>
+<div role="img" aria-label="강의 영상 미리보기 자리" style="display: flex; align-items: center; justify-content: center; height: 190px; border: 1.5px dashed #9a9aa2; border-radius: 12px; background: #efeff2; font-size: 13px; color: #555;">[강의 영상 미리보기 · 20–30분]</div>
+<ul style="margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px;">
+<li style="display: flex; gap: 10px; align-items: flex-start;">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px; color: #7C00FF;"><path d="M20 6 9 17l-5-5"></path></svg>
+<div><div style="font-size: 15px; font-weight: 700;">실제 주간 광고 리포트 자동화 데모</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #555;">처음부터 끝까지 화면으로 보여드립니다</div></div>
+</li>
+<li style="display: flex; gap: 10px; align-items: flex-start;">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px; color: #7C00FF;"><path d="M20 6 9 17l-5-5"></path></svg>
+<div><div style="font-size: 15px; font-weight: 700;">업무별 프롬프트·스킬 템플릿</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #555;">광고 리포트, 경쟁사 브리핑, 콘텐츠 캘린더, 고객사 리포트용</div></div>
+</li>
+<li style="display: flex; gap: 10px; align-items: flex-start;">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 2px; color: #7C00FF;"><path d="M20 6 9 17l-5-5"></path></svg>
+<div><div style="font-size: 15px; font-weight: 700;">미니 미션 가이드</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #555;">30–40분 따라 하면 내 업무 하나가 자동 초안으로 나옵니다</div></div>
+</li>
+</ul>
+<p style="margin: 4px 0 0; padding: 12px 14px; border-radius: 10px; background: #F5EBFF; font-size: 13px; line-height: 1.55; color: #333;">Claude 무료 플랜으로 따라 할 수 있습니다.</p>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 14px; padding: 36px 20px; background: #f7f7f9;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 4 · 72시간 일정과 보상</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">신청한 순간부터<br>나만의 72시간이 시작됩니다</h2>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column;">
+<li style="display: flex; gap: 14px;">
+<div style="display: flex; flex-direction: column; align-items: center; flex: 0 0 auto;"><span style="width: 12px; height: 12px; margin-top: 4px; border: 2.5px solid #7C00FF; border-radius: 50%; background: #fff;"></span><span style="flex: 1; width: 2px; background: #DEBFFF;"></span></div>
+<div style="padding-bottom: 20px;"><div style="font-size: 12px; font-weight: 700; color: #7C00FF;">신청 직후</div><div style="margin-top: 2px; font-size: 15px; font-weight: 700;">무료 강의와 자료가 열립니다</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #555;">고른 업무에 맞는 예시를 먼저 보여드립니다</div></div>
+</li>
+<li style="display: flex; gap: 14px;">
+<div style="display: flex; flex-direction: column; align-items: center; flex: 0 0 auto;"><span style="width: 12px; height: 12px; margin-top: 4px; border: 2.5px solid #7C00FF; border-radius: 50%; background: #fff;"></span><span style="flex: 1; width: 2px; background: #DEBFFF;"></span></div>
+<div style="padding-bottom: 20px;"><div style="font-size: 12px; font-weight: 700; color: #7C00FF;">1–2일차</div><div style="margin-top: 2px; font-size: 15px; font-weight: 700;">미니 미션을 진행합니다</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #555;">내 반복 업무 1개를 Claude 프로젝트에 세팅하고 자동 초안을 받아봅니다(30–40분)</div></div>
+</li>
+<li style="display: flex; gap: 14px;">
+<div style="display: flex; flex-direction: column; align-items: center; flex: 0 0 auto;"><span style="width: 12px; height: 12px; margin-top: 4px; border: 2.5px solid #7C00FF; border-radius: 50%; background: #fff;"></span><span style="flex: 1; width: 2px; background: #DEBFFF;"></span></div>
+<div style="padding-bottom: 20px;"><div style="font-size: 12px; font-weight: 700; color: #7C00FF;">72시간 안</div><div style="margin-top: 2px; font-size: 15px; font-weight: 700;">결과를 제출합니다</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #555;">결과 화면 캡처와 "이걸로 아낀 시간" 한 줄이면 됩니다</div></div>
+</li>
+<li style="display: flex; gap: 14px;">
+<div style="display: flex; flex-direction: column; align-items: center; flex: 0 0 auto;"><span style="width: 12px; height: 12px; margin-top: 4px; border-radius: 50%; background: #7C00FF;"></span></div>
+<div style="flex: 1; padding: 12px 14px; border-radius: 12px; background: #7C00FF; color: #fff;"><div style="font-size: 12px; font-weight: 700; color: #EBD9FF;">제출 즉시</div><div style="margin-top: 2px; font-size: 15px; font-weight: 700;">4주 과정 쿠폰이 발급됩니다</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #EBD9FF;">쿠폰은 발급 후 72시간 동안 쓸 수 있습니다</div></div>
+</li>
+</ol>
+<dl style="margin: 6px 0 0; padding: 14px 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff; display: flex; flex-direction: column; gap: 10px;">
+<div style="display: flex; gap: 12px;"><dt style="flex: 0 0 64px; font-size: 13px; font-weight: 700;">쿠폰 기준</dt><dd style="margin: 0; font-size: 13px; line-height: 1.55; color: #444;">결과 화면 캡처가 있어야 발급됩니다</dd></div>
+<div style="display: flex; gap: 12px;"><dt style="flex: 0 0 64px; font-size: 13px; font-weight: 700;">마감 후</dt><dd style="margin: 0; font-size: 13px; line-height: 1.55; color: #444;">다음 주 기수로 다시 도전할 수 있습니다(기한 연장 없음)</dd></div>
+</dl>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 36px 20px 40px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 5 · 가입·로그인</span>
+<h2 style="margin: 0; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">폼 없이,<br>가입·로그인하면 바로 신청됩니다</h2>
+<p style="margin: 0 0 6px; font-size: 14px; line-height: 1.6; color: #444;">신청 후 질문 하나만 답하면 강의가 열립니다.</p>
+<a href="#onboarding" data-go="onboarding" style="display: flex; align-items: center; justify-content: center; height: 52px; border-radius: 12px; background: #7C00FF; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none;">[간편 로그인 ①]로 시작하기</a>
+<a href="#onboarding" data-go="onboarding" style="display: flex; align-items: center; justify-content: center; height: 52px; border: 1.5px solid #7C00FF; border-radius: 12px; background: #fff; color: #7C00FF; font-size: 15px; font-weight: 700; text-decoration: none;">[간편 로그인 ②]로 시작하기</a>
+<a href="#onboarding" data-go="onboarding" style="display: flex; align-items: center; justify-content: center; height: 52px; border: 1.5px solid #d4d4da; border-radius: 12px; background: #fff; color: #111; font-size: 15px; font-weight: 500; text-decoration: none;">이메일로 가입하기</a>
+<a href="#onboarding" data-go="onboarding" style="display: flex; align-items: center; justify-content: center; min-height: 44px; font-size: 14px; font-weight: 700; color: #7C00FF;">이미 회원이에요 · 로그인하고 신청</a>
+<p style="margin: 4px 0 0; font-size: 12px; line-height: 1.6; color: #555;">새로 가입하면 이용약관과 개인정보 처리방침에 동의하게 됩니다. 쿠폰·마감 알림 수신 동의는 다음 화면에서 따로 선택합니다.</p>
+</section>
+
+<div style="position: sticky; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid #ececf0; background: #fff;">
+<div style="flex: 1; min-width: 0; font-size: 12px; line-height: 1.45; color: #555;"><b style="font-size: 14px; color: #111;">무료 · 72시간</b><br>미션을 내면 수강 쿠폰</div>
+<a href="#onboarding" data-go="onboarding" style="display: flex; align-items: center; justify-content: center; flex: 0 0 auto; height: 48px; padding: 0 22px; border-radius: 12px; background: #7C00FF; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none;">무료로 신청하기</a>
+</div>
+
+</div>
+</div>
+</div></section>
+<section class="frame" id="onboarding" aria-label="신청 직후 질문"><div class="ft"><b>② 신청 직후 질문</b><span>업무 1개 + 알림 동의</span></div><div class="fs">
+
+<div style="background: #ececf0; font-family: Pretendard, 'Noto Sans KR', system-ui, sans-serif; color: #111; word-break: keep-all;">
+<div style="max-width: 480px; margin: 0 auto; background: #ffffff;">
+
+<header style="display: flex; align-items: center; height: 56px; padding: 0 8px; border-bottom: 1px solid #ececf0;">
+<a href="#main" data-go="main" aria-label="신청 페이지로 돌아가기" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></a>
+<span style="font-size: 15px; font-weight: 700;">신청 완료</span>
+</header>
+
+<div style="display: flex; flex-direction: column; gap: 18px; padding: 24px 20px 32px;">
+<div style="align-self: flex-start; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #F5EBFF; color: #7C00FF; font-size: 13px; font-weight: 700;">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+<span>나의 72시간 시작 · <span style="font-variant-numeric: tabular-nums;"><span class="js-timer" data-sec="259198">71:59:58</span></span> 남음</span>
+</div>
+
+<div>
+<h1 style="margin: 0; font-size: 24px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">어떤 업무를<br>에이전트에게 맡기고 싶으세요?</h1>
+<p style="margin: 8px 0 0; font-size: 14px; line-height: 1.6; color: #444;">고른 업무에 맞춰 강의 예시와 템플릿을 먼저 보여드립니다.</p>
+</div>
+
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px;">
+<legend style="margin-bottom: 10px; padding: 0; font-size: 13px; font-weight: 700; color: #555;">업무 하나를 골라주세요</legend>
+
+<label class="chip" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1.5px solid #d4d4da; border-radius: 12px; background: #ffffff; color: #111; font-size: 15px; font-weight: 500; cursor: pointer;">
+<input type="radio" name="task" value="ad" style="width: 18px; height: 18px; margin: 0; accent-color: #7C00FF;">
+<span>주간 광고 리포트</span>
+</label>
+
+<label class="chip" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1.5px solid #d4d4da; border-radius: 12px; background: #ffffff; color: #111; font-size: 15px; font-weight: 500; cursor: pointer;">
+<input type="radio" name="task" value="brief" style="width: 18px; height: 18px; margin: 0; accent-color: #7C00FF;">
+<span>경쟁사·트렌드 브리핑</span>
+</label>
+
+<label class="chip" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1.5px solid #d4d4da; border-radius: 12px; background: #ffffff; color: #111; font-size: 15px; font-weight: 500; cursor: pointer;">
+<input type="radio" name="task" value="cal" style="width: 18px; height: 18px; margin: 0; accent-color: #7C00FF;">
+<span>콘텐츠 캘린더 정리</span>
+</label>
+
+<label class="chip" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1.5px solid #d4d4da; border-radius: 12px; background: #ffffff; color: #111; font-size: 15px; font-weight: 500; cursor: pointer;">
+<input type="radio" name="task" value="client" style="width: 18px; height: 18px; margin: 0; accent-color: #7C00FF;">
+<span>고객사 월간 리포트</span>
+</label>
+
+<label class="chip" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1.5px solid #d4d4da; border-radius: 12px; background: #ffffff; color: #111; font-size: 15px; font-weight: 500; cursor: pointer;">
+<input type="radio" name="task" value="etc" style="width: 18px; height: 18px; margin: 0; accent-color: #7C00FF;">
+<span>기타(직접 입력)</span>
+</label>
+
+</fieldset>
+
+
+<label class="js-etc" hidden style="display: flex; flex-direction: column; gap: 6px;">
+<span style="font-size: 13px; font-weight: 700;">어떤 업무인가요?</span>
+<input type="text" placeholder="예: 주간 매출 보고서 정리" style="height: 48px; padding: 0 14px; border: 1.5px solid #c4c4cc; border-radius: 10px; font-family: inherit; font-size: 15px;">
+</label>
+
+
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 12px; background: #f7f7f9; cursor: pointer;">
+<input type="checkbox" style="flex: 0 0 auto; width: 20px; height: 20px; margin: 2px 0 0; accent-color: #7C00FF;">
+<span style="font-size: 14px; line-height: 1.55;"><b>[선택] 쿠폰·마감 알림 받기</b><br><span style="font-size: 12px; color: #555;">광고성 정보 수신 동의입니다. 미션을 내면 쿠폰을, 마감 24시간 전에는 알림을 보내드립니다. 언제든 끌 수 있습니다.</span></span>
+</label>
+
+<div style="display: flex; flex-direction: column; gap: 4px; margin-top: 4px;">
+<button type="button" class="js-go" disabled data-demo="예시 화면입니다. 실제로는 여기서 무료 강의가 열립니다." style="height: 54px; border: 0; border-radius: 12px; background: #e6e6ea; color: #5c5c66; font-family: inherit; font-size: 16px; font-weight: 700; cursor: pointer;">강의 바로 보기</button>
+<button type="button" data-demo="예시 화면입니다. 업무를 고르지 않아도 강의는 열립니다." style="height: 44px; border: 0; background: none; color: #555; font-family: inherit; font-size: 14px; text-decoration: underline; cursor: pointer;">나중에 고를게요</button>
+</div>
+</div>
+
+</div>
+</div>
+</div></section>
+<section class="frame" id="detail" aria-label="최종 상세페이지"><div class="ft"><b>③ 최종 상세페이지</b><span>미션 제출자 전용</span></div><div class="fs">
+
+<div style="background: #ececf0; font-family: Pretendard, 'Noto Sans KR', system-ui, sans-serif; color: #111; word-break: keep-all;">
+<div style="max-width: 480px; margin: 0 auto; background: #ffffff;">
+
+<header style="display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 20px; border-bottom: 1px solid #ececf0;">
+<span style="font-size: 16px; font-weight: 800; letter-spacing: -0.02em;">코드잇 <span style="color: #7C00FF;">10x</span></span>
+<span style="padding: 4px 10px; border-radius: 999px; background: #F5EBFF; color: #7C00FF; font-size: 12px; font-weight: 700;">OO님 전용</span>
+</header>
+
+<section style="display: flex; flex-direction: column; gap: 16px; padding: 28px 20px 32px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 1 · 히어로</span>
+<div style="align-self: flex-start; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: #7C00FF;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
+<span>미니 미션 제출 완료</span>
+</div>
+<h1 style="margin: 0; font-size: 27px; font-weight: 800; line-height: 1.38; letter-spacing: -0.02em;">OO님이 채용한<br>첫 <span style="color: #7C00FF;">AI 마케팅 에이전트</span>,<br>4주 뒤엔 혼자 일합니다</h1>
+<div style="padding: 14px; border: 1px solid #e6e6ea; border-radius: 12px;">
+<div role="img" aria-label="OO님이 제출한 결과 화면 자리" style="display: flex; align-items: center; justify-content: center; height: 150px; border: 1.5px dashed #9a9aa2; border-radius: 10px; background: #efeff2; font-size: 13px; color: #555;">[OO님이 제출한 결과 화면]</div>
+<div style="margin-top: 10px; font-size: 12px; font-weight: 500; color: #555;">OO님이 적은 "아낀 시간"</div>
+<div style="margin-top: 2px; font-size: 15px; font-weight: 700;">[제출 때 적은 한 줄]</div>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 12px; background: #7C00FF; color: #fff;">
+<div><div style="font-size: 12px; color: #EBD9FF;">OO님 전용 쿠폰</div><div style="margin-top: 2px; font-size: 16px; font-weight: 700;">[할인율 · 사내 규정 확인 후]</div></div>
+<div style="text-align: right;"><div style="font-size: 12px; color: #EBD9FF;">남은 시간</div><div style="margin-top: 2px; font-size: 16px; font-weight: 700; font-variant-numeric: tabular-nums;"><span class="js-timer" data-sec="169929">47:12:09</span></div></div>
+</div>
+<a href="#price" data-scroll="price" style="display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 12px; background: #7C00FF; color: #fff; font-size: 16px; font-weight: 700; text-decoration: none;">쿠폰 적용하고 4주 과정 시작하기</a>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 36px 20px; background: #f7f7f9;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 2 · 4주 로드맵</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">지금은 시켜야 일하지만,<br>4주 뒤엔 알아서 일합니다</h2>
+<div style="padding: 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;">
+<div style="font-size: 12px; font-weight: 700; color: #555;">지금 · 미니 미션 결과</div>
+<div style="margin-top: 4px; font-size: 16px; font-weight: 700;">내가 시켜야 초안을 써줍니다</div>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.55; color: #444;">업무 맥락과 규칙을 세팅해 두고, 요청할 때마다 초안을 받습니다.</p>
+</div>
+<div style="display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; font-weight: 700; color: #7C00FF;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg>
+<span>4주 과정</span>
+</div>
+<div style="padding: 16px; border-radius: 12px; background: #7C00FF; color: #fff;">
+<div style="font-size: 12px; font-weight: 700; color: #EBD9FF;">4주 뒤</div>
+<div style="margin-top: 4px; font-size: 16px; font-weight: 700;">정해진 시간에 알아서 리포트를 만들고 분석합니다</div>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.55; color: #EBD9FF;">예: 매주 월요일 오전 9시, 지난주 광고 성과 요약과 분석 리포트가 와 있습니다.</p>
+</div>
+<div style="margin-top: 8px;">
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;">
+<span style="height: 8px; border-radius: 4px; background: #7C00FF;"></span>
+<span style="height: 8px; border-radius: 4px; background: #7C00FF;"></span>
+<span style="height: 8px; border-radius: 4px; background: #dcdce2;"></span>
+<span style="height: 8px; border-radius: 4px; background: #dcdce2;"></span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin-top: 6px; font-size: 12px; color: #555; text-align: center;">
+<span>1주차</span><span>2주차</span><span>3주차</span><span>4주차</span>
+</div>
+<p style="margin: 8px 0 0; font-size: 13px; line-height: 1.55; color: #333;">미니 미션으로 1–2주차 내용을 이미 일부 해봤습니다.</p>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 14px; padding: 36px 20px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 3 · 직무별 결과물</span>
+<h2 style="margin: 0; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">같은 직무의 결과물로<br>먼저 확인하세요</h2>
+<div role="group" aria-label="직무 선택" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: #f1f1f4;">
+
+<button type="button" class="js-tab" data-tab="perf" aria-pressed="true" style="min-height: 44px; border: 0; border-radius: 9px; background: #ffffff; color: #7C00FF; box-shadow: 0 1px 3px rgba(17,17,17,0.12); font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;">퍼포먼스</button>
+
+<button type="button" class="js-tab" data-tab="brand" aria-pressed="false" style="min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: #555555; box-shadow: none; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;">콘텐츠·브랜드</button>
+
+<button type="button" class="js-tab" data-tab="free" aria-pressed="false" style="min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: #555555; box-shadow: none; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;">프리랜서</button>
+
+</div>
+<div style="padding: 14px; border: 1px solid #e6e6ea; border-radius: 12px;">
+<div role="img" aria-label="수강생 결과물 화면 자리" style="display: flex; align-items: center; justify-content: center; height: 170px; padding: 0 12px; border: 1.5px dashed #9a9aa2; border-radius: 10px; background: #efeff2; font-size: 13px; color: #555; text-align: center;"><span class="js-ph">[퍼포먼스 마케터 수강생 결과물 화면]</span></div>
+<div style="margin-top: 12px; font-size: 16px; font-weight: 700;"><span class="js-title">주간 광고 리포트 + 이상치 알림</span></div>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.55; color: #444;"><span class="js-desc">매체별 성과를 모아 요약하고, 지난주보다 크게 바뀐 지표를 먼저 짚어줍니다.</span></p>
+</div>
+<p style="margin: 0; font-size: 12px; color: #555;">신청할 때 고른 업무의 탭이 먼저 열립니다.</p>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 14px; padding: 36px 20px; background: #f7f7f9;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 4 · 혼자 멈추는 이유 → 완주 시스템</span>
+<h2 style="margin: 0; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">혼자 하면 왜<br>중간에 멈출까요?</h2>
+<ul style="margin: 0; padding: 14px 16px; list-style: none; display: flex; flex-direction: column; gap: 8px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;">
+<li style="font-size: 14px; line-height: 1.55; color: #444;">— 막혔을 때 물어볼 곳이 없어서</li>
+<li style="font-size: 14px; line-height: 1.55; color: #444;">— 바쁜 주에 한 번 미루면 다시 열지 않아서</li>
+<li style="font-size: 14px; line-height: 1.55; color: #444;">— 예제는 따라 했는데 내 업무에 맞게 바꾸지 못해서</li>
+</ul>
+<div style="margin-top: 6px; font-size: 16px; font-weight: 700;">10x는 끝까지 하게 만드는 장치가 있습니다</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #7C00FF; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;">1</span><div><div style="font-size: 15px; font-weight: 700;">주차별 미션</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #444;">매주 해야 할 일이 정해져 있습니다</div></div></div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #7C00FF; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;">2</span><div><div style="font-size: 15px; font-weight: 700;">48시간 안에 답변</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #444;">막히면 질문하고 이틀 안에 답을 받습니다</div></div></div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;"><span style="flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #7C00FF; color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;">3</span><div><div style="font-size: 15px; font-weight: 700;">함께하는 커뮤니티</div><div style="margin-top: 2px; font-size: 13px; line-height: 1.55; color: #444;">같은 기수와 진행 상황을 나눕니다</div></div></div>
+</div>
+<div style="display: flex; align-items: baseline; gap: 12px; padding: 16px; border-radius: 12px; background: #F5EBFF;">
+<span style="font-size: 32px; font-weight: 800; letter-spacing: -0.02em; color: #7C00FF;">87.6%</span>
+<div><div style="font-size: 14px; font-weight: 700;">10x 완주율</div><div style="margin-top: 2px; font-size: 12px; color: #555;">코드잇 발표(2026.07)</div></div>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 36px 20px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 5 · 4주 커리큘럼과 미션 3개</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">4주 동안 만드는 것</h2>
+<ol style="margin: 0; padding: 0; list-style: none; border-top: 1px solid #e6e6ea;">
+<li style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #e6e6ea;"><span style="flex: 0 0 48px; font-size: 14px; font-weight: 800; color: #7C00FF;">1주차</span><div><div style="font-size: 14px; line-height: 1.55;">[주제 · 커리큘럼 확인 후 입력]</div><span style="display: inline-block; margin-top: 6px; padding: 3px 8px; border-radius: 6px; background: #F5EBFF; color: #7C00FF; font-size: 12px; font-weight: 700;">미니 미션에서 일부 해봄</span></div></li>
+<li style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #e6e6ea;"><span style="flex: 0 0 48px; font-size: 14px; font-weight: 800; color: #7C00FF;">2주차</span><div><div style="font-size: 14px; line-height: 1.55;">[주제 · 커리큘럼 확인 후 입력]</div><span style="display: inline-block; margin-top: 6px; padding: 3px 8px; border-radius: 6px; background: #F5EBFF; color: #7C00FF; font-size: 12px; font-weight: 700;">미니 미션에서 일부 해봄</span></div></li>
+<li style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #e6e6ea;"><span style="flex: 0 0 48px; font-size: 14px; font-weight: 800; color: #7C00FF;">3주차</span><div><div style="font-size: 14px; line-height: 1.55;">[주제 · 커리큘럼 확인 후 입력]</div></div></li>
+<li style="display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #e6e6ea;"><span style="flex: 0 0 48px; font-size: 14px; font-weight: 800; color: #7C00FF;">4주차</span><div><div style="font-size: 14px; font-weight: 700; line-height: 1.55;">정해진 시간에 알아서 리포트를 만들고 분석하게 만들기</div><span style="display: inline-block; margin-top: 6px; padding: 3px 8px; border: 1px solid #c4c4cc; border-radius: 6px; color: #444; font-size: 12px;">Claude Pro 필요</span></div></li>
+</ol>
+<p style="margin: 4px 0 0; padding: 12px 14px; border-radius: 10px; background: #f7f7f9; font-size: 13px; line-height: 1.55; color: #333;">미션 3개를 내면 완주입니다. [미션 1·2·3 배치 · 커리큘럼 확인 후 입력]</p>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 36px 20px; background: #f7f7f9;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 6 · 마케터 수강생 사례</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">먼저 끝낸 마케터들</h2>
+<div style="padding: 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;">
+<div style="font-size: 12px; font-weight: 700; color: #7C00FF;">수강생 결과물</div>
+<div style="margin-top: 4px; font-size: 15px; font-weight: 700;">마케터의 월간 매출 보고 자동화</div>
+<div style="margin-top: 8px; font-size: 13px; color: #555;">[결과 화면 · 줄어든 시간]</div>
+</div>
+<div style="padding: 16px; border: 1.5px dashed #9a9aa2; border-radius: 12px; background: #fff; font-size: 13px; line-height: 1.55; color: #555;">[마케터 수강생 후기 · 직무, 자동화한 업무, 줄어든 시간]</div>
+<div style="padding: 16px; border: 1.5px dashed #9a9aa2; border-radius: 12px; background: #fff; font-size: 13px; line-height: 1.55; color: #555;">[마케터 수강생 후기 · 직무, 자동화한 업무, 줄어든 시간]</div>
+</section>
+
+<section id="detail-price" style="display: flex; flex-direction: column; gap: 12px; padding: 36px 20px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 7 · 총비용 공개</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">결제 전에<br>총비용을 먼저 알려드립니다</h2>
+<dl style="margin: 0; padding: 4px 16px; border: 1px solid #e6e6ea; border-radius: 12px;">
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f3;"><dt style="font-size: 14px;">4주 과정 수강료</dt><dd style="margin: 0; font-size: 14px; font-weight: 700;">29.9만 원</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f3;"><dt style="font-size: 14px;">OO님 쿠폰</dt><dd style="margin: 0; font-size: 14px; font-weight: 700; color: #7C00FF;">[할인 금액]</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f3;"><dt style="font-size: 14px;">Claude · 1–3주차</dt><dd style="margin: 0; font-size: 14px; font-weight: 700;">무료 플랜 0원</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f3;"><dt style="font-size: 14px;">Claude Pro · 4주차부터</dt><dd style="margin: 0; font-size: 14px; font-weight: 700;">[월 구독료]</dd></div>
+<div style="display: flex; justify-content: space-between; gap: 12px; padding: 14px 0;"><dt style="font-size: 15px; font-weight: 800;">예상 총비용</dt><dd style="margin: 0; font-size: 15px; font-weight: 800; text-align: right; color: #7C00FF;">[수강료 − 쿠폰 + Pro 1개월]</dd></div>
+</dl>
+<p style="margin: 0; font-size: 13px; line-height: 1.55; color: #444;">Claude Pro 구독은 수강료와 별도로 직접 결제합니다. 결제한 뒤에 알게 되는 비용이 없도록 미리 알려드립니다.</p>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 12px; padding: 36px 20px; background: #f7f7f9;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 8 · 가격·쿠폰·환불</span>
+<h2 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">결제 전에 확인하세요</h2>
+<dl style="margin: 0; padding: 4px 16px; border: 1px solid #e6e6ea; border-radius: 12px; background: #fff;">
+<div style="display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f3;"><dt style="flex: 0 0 72px; font-size: 13px; font-weight: 700;">쿠폰 기한</dt><dd style="margin: 0; font-size: 13px; line-height: 1.55; color: #444;">제출한 때부터 72시간, 연장은 없습니다. 지금 <b style="color: #7C00FF; font-variant-numeric: tabular-nums;"><span class="js-timer" data-sec="169929">47:12:09</span></b> 남았습니다.</dd></div>
+<div style="display: flex; gap: 12px; padding: 12px 0;"><dt style="flex: 0 0 72px; font-size: 13px; font-weight: 700;">환불</dt><dd style="margin: 0; font-size: 13px; line-height: 1.55; color: #444;">[환불 규정 요약]<br><a href="#price" data-demo="예시 화면입니다. 실제로는 환불 규정 전문이 열립니다." style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: #7C00FF;">환불 규정 전문 보기</a></dd></div>
+</dl>
+<div style="padding: 16px; border: 1.5px solid #7C00FF; border-radius: 12px; background: #fff;">
+<div style="font-size: 15px; font-weight: 700;">회사 교육비로 결제하시나요?</div>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.55; color: #444;">영수증과 세금계산서를 발행해 드립니다. [발행 절차 확인 후 입력]</p>
+<a href="#price" data-demo="예시 화면입니다. 실제로는 결제·증빙 안내가 열립니다." style="display: flex; align-items: center; justify-content: center; height: 46px; margin-top: 10px; border-radius: 10px; background: #F5EBFF; color: #7C00FF; font-size: 14px; font-weight: 700; text-decoration: none;">결제·증빙 안내 보기</a>
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 8px; padding: 36px 20px;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #a8a8b0; border-radius: 999px; color: #555; font-size: 11px; font-weight: 500;">섹션 9 · FAQ</span>
+<h2 style="margin: 0 0 8px; font-size: 22px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">자주 묻는 질문</h2>
+<div style="border-top: 1px solid #e6e6ea;">
+
+<div style="border-bottom: 1px solid #e6e6ea;">
+<button type="button" class="js-faq" aria-expanded="true" style="width: 100%; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border: 0; background: none; color: #111; text-align: left; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;"><span>회사 보안 때문에 계정 연결이 안 되면요?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; color: #7C00FF; transform: rotate(180deg);"><path d="m6 9 6 6 6-6"></path></svg></button>
+
+<p class="js-ans" style="margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: #444;">회사 계정을 연결하지 않고 개인 환경에서 실습하는 방법을 따로 안내합니다.</p>
+
+</div>
+
+<div style="border-bottom: 1px solid #e6e6ea;">
+<button type="button" class="js-faq" aria-expanded="false" style="width: 100%; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border: 0; background: none; color: #111; text-align: left; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;"><span>Claude Pro는 꼭 필요한가요?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; color: #7C00FF; transform: rotate(0deg);"><path d="m6 9 6 6 6-6"></path></svg></button>
+
+<p class="js-ans" hidden style="margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: #444;">1–3주차는 무료 플랜으로 충분합니다. 정해진 시간에 알아서 실행되게 만드는 4주차부터 Pro가 필요합니다.</p>
+
+</div>
+
+<div style="border-bottom: 1px solid #e6e6ea;">
+<button type="button" class="js-faq" aria-expanded="false" style="width: 100%; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border: 0; background: none; color: #111; text-align: left; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;"><span>쿠폰 기한을 늘릴 수 있나요?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; color: #7C00FF; transform: rotate(0deg);"><path d="m6 9 6 6 6-6"></path></svg></button>
+
+<p class="js-ans" hidden style="margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: #444;">쿠폰은 제출한 때부터 72시간 동안만 쓸 수 있고, 연장은 없습니다.</p>
+
+</div>
+
+<div style="border-bottom: 1px solid #e6e6ea;">
+<button type="button" class="js-faq" aria-expanded="false" style="width: 100%; min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border: 0; background: none; color: #111; text-align: left; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;"><span>강의는 언제까지 볼 수 있나요?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; color: #7C00FF; transform: rotate(0deg);"><path d="m6 9 6 6 6-6"></path></svg></button>
+
+<p class="js-ans" hidden style="margin: 0 0 16px; font-size: 14px; line-height: 1.6; color: #444;">[수강 기간 확인 후 입력]</p>
+
+</div>
+
+</div>
+</section>
+
+<section style="display: flex; flex-direction: column; gap: 14px; padding: 40px 20px 44px; background: #7C00FF; color: #fff;">
+<span style="align-self: flex-start; padding: 3px 9px; border: 1px dashed #EBD9FF; border-radius: 999px; color: #fff; font-size: 11px; font-weight: 500;">섹션 10 · 최종 CTA</span>
+<h2 style="margin: 0; font-size: 24px; font-weight: 800; line-height: 1.4; letter-spacing: -0.02em;">OO님의 첫 에이전트,<br>이제 혼자 일하게 만드세요</h2>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #EBD9FF;">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+<span>쿠폰 남은 시간 <b style="color: #fff; font-variant-numeric: tabular-nums;"><span class="js-timer" data-sec="169929">47:12:09</span></b></span>
+</div>
+<button type="button" data-demo="예시 화면입니다. 실제로는 쿠폰이 적용된 결제 화면으로 이동합니다." style="height: 54px; border: 0; border-radius: 12px; background: #fff; color: #7C00FF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer;">쿠폰 적용하고 결제하기</button>
+<p style="margin: 0; font-size: 12px; line-height: 1.55; color: #EBD9FF;">결제하면 1주차 미션 안내를 바로 보내드립니다.</p>
+</section>
+
+<div style="position: sticky; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-top: 1px solid #ececf0; background: #fff;">
+<div style="flex: 1; min-width: 0;"><div style="font-size: 12px; color: #555;">쿠폰 남은 시간</div><div style="font-size: 16px; font-weight: 800; font-variant-numeric: tabular-nums; color: #7C00FF;"><span class="js-timer" data-sec="169929">47:12:09</span></div></div>
+<button type="button" data-demo="예시 화면입니다. 실제로는 쿠폰이 적용된 결제 화면으로 이동합니다." style="flex: 0 0 auto; height: 48px; padding: 0 22px; border: 0; border-radius: 12px; background: #7C00FF; color: #fff; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer;">쿠폰 적용해 결제</button>
+</div>
+
+</div>
+</div>
+</div></section>
+</main>
+<section class="readme">
+<div><h2>읽는 법</h2><ul><li>모바일 기준(폭 390px) 와이어프레임입니다. 디자인 시안이 아니라 섹션 순서와 사용 흐름을 보여줍니다.</li><li>점선 테두리의 '섹션' 라벨은 기획서의 섹션 번호입니다.</li><li>회색 점선 박스는 이미지와 실제 데이터가 들어갈 자리입니다.</li><li>버튼, 업무 선택, 탭, FAQ, 타이머가 실제로 작동합니다.</li></ul></div>
+<div><h2>흐름</h2><p>① 신청 페이지 → ② 신청 직후 질문 → 무료 강의·미니 미션 → 제출 → ③ 최종 상세페이지. ③은 미션 제출자만 쿠폰 링크로 도착합니다.</p></div>
+<div><h2>[ ] 표시는 확인이 필요한 값</h2><ul><li>간편 로그인 수단</li><li>주차별 커리큘럼과 미션 3개 배치</li><li>쿠폰 할인율(사내 할인 규정 확인 후)</li><li>Claude Pro 월 구독료</li><li>환불 규정, 세금계산서 발행 절차, 수강 기간</li><li>마케터 수강생 사례와 후기</li></ul></div>
+</section>
+<footer class="foot">우승훈 · 코드잇 10x 마케팅 매니저 사전 과제 제출용 와이어프레임</footer>
+<div class="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+var BR='#7C00FF', TINT='#F5EBFF';
+function desk(){return window.matchMedia('(min-width:1280px)').matches;}
+var toastEl=document.querySelector('.toast'), tt;
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('on');},2400);}
+var tabBtns=[].slice.call(document.querySelectorAll('[data-tab-screen]'));
+function show(id){
+  if(desk()){
+    var f=document.getElementById(id); f.querySelector('.fs').scrollTo({top:0,behavior:'smooth'});
+    f.classList.add('flash'); setTimeout(function(){f.classList.remove('flash');},900); return;
+  }
+  [].forEach.call(document.querySelectorAll('.frame'),function(f){f.classList.toggle('on',f.id===id);});
+  tabBtns.forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-tab-screen')===id));});
+  window.scrollTo(0,0);
+}
+tabBtns.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-tab-screen'));});});
+document.addEventListener('click',function(e){
+  var go=e.target.closest('[data-go]'); if(go){e.preventDefault();show(go.getAttribute('data-go'));return;}
+  var sc=e.target.closest('[data-scroll]'); if(sc){e.preventDefault();var t=document.getElementById('detail-'+sc.getAttribute('data-scroll')); if(t) t.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  var dm=e.target.closest('[data-demo]'); if(dm){e.preventDefault(); if(!dm.disabled) toast(dm.getAttribute('data-demo'));}
+});
+var timers=[].slice.call(document.querySelectorAll('.js-timer'));
+function fmt(s){return [Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(function(n){return String(n).padStart(2,'0');}).join(':');}
+setInterval(function(){timers.forEach(function(t){var s=Math.max(0,(+t.getAttribute('data-sec'))-1);t.setAttribute('data-sec',s);t.textContent=fmt(s);});},1000);
+var chips=[].slice.call(document.querySelectorAll('.chip')), etc=document.querySelector('.js-etc'), goBtn=document.querySelector('.js-go');
+chips.forEach(function(c){var r=c.querySelector('input');r.addEventListener('change',function(){
+  chips.forEach(function(x){var on=x.querySelector('input').checked; x.style.border=on?('2px solid '+BR):'1.5px solid #d4d4da'; x.style.background=on?TINT:'#ffffff'; x.style.fontWeight=on?'700':'500';});
+  if(etc) etc.hidden=(r.value!=='etc');
+  goBtn.disabled=false; goBtn.style.background=BR; goBtn.style.color='#ffffff';
+});});
+var data={perf:['주간 광고 리포트 + 이상치 알림','매체별 성과를 모아 요약하고, 지난주보다 크게 바뀐 지표를 먼저 짚어줍니다.','[퍼포먼스 마케터 수강생 결과물 화면]'],
+brand:['경쟁사·트렌드 모닝 브리핑','경쟁사 광고와 업계 뉴스를 모아 아침마다 한 장으로 정리합니다.','[콘텐츠·브랜드 마케터 수강생 결과물 화면]'],
+free:['고객사 월간 리포트','고객사별 데이터를 같은 형식의 리포트 초안으로 만듭니다.','[프리랜서 마케터 수강생 결과물 화면]']};
+var tabs=[].slice.call(document.querySelectorAll('.js-tab'));
+tabs.forEach(function(t){t.addEventListener('click',function(){
+  tabs.forEach(function(x){var on=x===t; x.setAttribute('aria-pressed',String(on)); x.style.background=on?'#ffffff':'transparent'; x.style.color=on?BR:'#555555'; x.style.boxShadow=on?'0 1px 3px rgba(17,17,17,0.12)':'none';});
+  var d=data[t.getAttribute('data-tab')];
+  document.querySelector('.js-title').textContent=d[0]; document.querySelector('.js-desc').textContent=d[1]; document.querySelector('.js-ph').textContent=d[2];
+});});
+var faqs=[].slice.call(document.querySelectorAll('.js-faq'));
+faqs.forEach(function(b){b.addEventListener('click',function(){
+  var open=b.getAttribute('aria-expanded')!=='true';
+  faqs.forEach(function(x){var on=(x===b)&&open; x.setAttribute('aria-expanded',String(on)); x.querySelector('svg').style.transform='rotate('+(on?180:0)+'deg)'; var a=x.parentElement.querySelector('.js-ans'); if(a) a.hidden=!on;});
+});});
+var h=location.hash.slice(1); if(h==='main'||h==='onboarding'||h==='detail') show(h);
+})();
+</script>
+</body>
+</html>
